@@ -1,40 +1,20 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { userSlice } from "./reducer/userSlice";
-import { memoSlice } from "./reducer/memoSlice";
-import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
+import { createStore, applyMiddleware, compose } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import rootReducer from "./reducer";
 
 const persistConfig = {
   key: "root",
-  version: 1,
   storage,
 };
 
-const reducer = combineReducers({
-  user: userSlice.reducer,
-  memo: memoSlice.reducer,
-});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const persistedReducer = persistReducer(persistConfig, reducer);
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-});
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// const store = configureStore({
-//   reducer: {
-//     user: userSlice.reducer,
-//     memo: memoSlice.reducer,
-//   },
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: false,
-//     }),
-// });
-// export default store;
-// export type RootState = ReturnType<typeof store.getState>;
-// export const persistor = persistStore(store);
+export const store = createStore(
+  persistedReducer,
+  composeEnhancers(applyMiddleware())
+);
+
+export const persistor = persistStore(store);

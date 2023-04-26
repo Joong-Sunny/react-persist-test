@@ -6,18 +6,18 @@ import App from "./App.tsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Detail from "./components/Detail.tsx";
 import "./index.css";
+import Loading from "./components/Loading.tsx";
 import { store } from "./store.ts";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
 const queryClient = new QueryClient();
-let persistor = persistStore(store);
+const persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <App />
+      <PersistGate loading={<Loading />} persistor={persistor}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <Routes>

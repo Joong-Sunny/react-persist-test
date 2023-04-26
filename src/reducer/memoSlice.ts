@@ -1,17 +1,17 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+const initialState = {
+  name: "",
+};
 
-export const memoSlice = createSlice({
-  name: "memo",
-  initialState: {
-    memo: {
-      gi: "111",
-      yon: "111",
-      oh: "111",
-    },
-  },
-  reducers: {
-    setUser: (state, action: PayloadAction<any>) => {
-      state.memo = action.payload;
-    },
-  },
-});
+const memoSlice = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_NAME":
+      return {
+        ...state,
+        name: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default memoSlice;

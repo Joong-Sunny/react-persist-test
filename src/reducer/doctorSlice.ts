@@ -1,10 +1,10 @@
 const initialState = {
-  name: "",
+  doctors: [],
 };
 
-const userSlice = (state = initialState, action) => {
+const doctorSlice = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_NAME":
+    case "의사 진찰시작":
       return {
         ...state,
         name: action.payload,
@@ -14,4 +14,4 @@ const userSlice = (state = initialState, action) => {
   }
 };
 
-export default userSlice;
+export default doctorSlice;

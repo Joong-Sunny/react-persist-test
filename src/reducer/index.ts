@@ -1,19 +1,14 @@
-// import { combineReducers } from "redux";
-// import { persistReducer } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
-// import { userSlice } from "./userSlice";
-// import { memoSlice } from "./memoSlice";
+import { combineReducers } from "redux";
+import userSlice from "./userSlice";
+import memoSlice from "./memoSlice";
+import patientSlice from "./patientSlice";
+import doctorSlice from "./doctorSlice";
 
-// const persistConfig = {
-//   key: "root",
-//   storage: storage, // Use lowercase 'storage'
-//   whitelist: ["memo"], // Correct the typo from 'whiltelist' to 'whitelist'
-//   blacklist: ["user"],
-// };
+const rootReducer = combineReducers({
+  user: userSlice,
+  memo: memoSlice,
+  patient: patientSlice,
+  doctor: doctorSlice,
+});
 
-// const rootReducer = combineReducers({
-//   user: userSlice.reducer,
-//   memo: memoSlice.reducer,
-// });
-
-// export default persistReducer(persistConfig, rootReducer);
+export default rootReducer;
