@@ -1,4 +1,3 @@
-// customStorage.ts
 import { openDB } from "idb";
 import { PersistedState } from "redux-persist/es/types";
 import { Storage } from "redux-persist/lib/types";
